@@ -31,6 +31,16 @@ Keep in mind that __iptables is used__ to setup the firewall. Before setting up 
 
 You can add this script as an `up` parameter to your client config file and it will be executed automatically each time the tunnel goes up. `up /full/path/to/linux-killswitch.sh`. If running an `up` script don't forget to set `--script-security` param to at least `2`.
 
+The script can also receive parameters so we're covered (docs):
+
+```
+--up cmd
+    Run command cmd after successful TUN/TAP device open (pre --user UID change).
+    cmd consists of a path to script (or executable program), optionally followed
+    by arguments. The path and arguments may be single- or double-quoted and/or 
+    escaped using a backslash, and should be separated by one or more spaces.
+```
+
 ## (Linux) How to delete the rules
 
 In case something unexpected takes place and you're stuck with a non-working internet due to iptables rules that failed to be removed you can use the `./linux-killswitch.sh unlock` command and attempt to delete them again.
