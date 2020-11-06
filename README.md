@@ -13,7 +13,7 @@ Shameless plug
 ## Build your own no logs secure VPN
 This project is part of the [nologs-vpn](https://nologs-vpn.com) project. nologs-vpn allows you to create VPN servers hosted on your own VM server. For a small fee our service creates the server, installs the desired VPN service and generates client config so you can connect. In just 5 minutes you can have your own, private and secure, VPN server that has no logs, no backdoors and is powered by tested, open-source software.
 
-## How to use the Linux script
+## (Linux) How to use the script
 The Linux Kill Switch tries to guess as many info as possible while allowing you to overwrite these params.
 
 1. After downloading the script you need to make it executable: `chmod +x ./linux-killswitch.sh`
@@ -27,6 +27,6 @@ Full example (with all params) of running this kill switch:
 
 Keep in mind that __iptables is used__ to setup the firewall. Before setting up the switch we backup your existing iptables rules to a local file, next to this script. If you're adding new rules to iptables while this script is running, they will be lost once the script exits since it performs a full restore from backup.
 
-## How to delete the rules
+## (Linux) How to delete the rules
 
 In case something unexpected takes place and you're stuck with a non-working internet due to iptables rules that failed to be removed you can use the `./linux-killswitch.sh unlock` command and attempt to delete them again.
