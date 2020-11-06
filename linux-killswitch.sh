@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# For documentation about running this script please visit our repo at:
+# 	https://github.com/nologs-vpn/killswitch
 
 function log {
 	echo "[Killswitch][$(date)] - $1"
@@ -14,11 +17,13 @@ iptablesBackup="./iptables.backup"
 #	i: vpn interface (ex: tun0, wg0)
 #	d: default interface (ex: eth0)
 #######################################################
-while getopts ":c:i:d:" opt; do
+while getopts ":c:i:d:r:" opt; do
 	case $opt in
 		c) cmd="$OPTARG"
 		;;
 		i) vpnIface="$OPTARG"
+		;;
+		r) remote="$OPTARG"
 		;;
 		d) defaultIface="$OPTARG"
 		;;
