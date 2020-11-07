@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.8](https://github.com/nologs-vpn/killswitch/compare/v1.1.7...v1.1.8) (2020-11-07)
+
+
+### Bug Fixes
+
+* ambiguous message ([f3e303d](https://github.com/nologs-vpn/killswitch/commit/f3e303da769fe8e9f05d7ec5880c5b174b5fbade))
+
 ### [1.1.7](https://github.com/nologs-vpn/killswitch/compare/v1.1.6...v1.1.7) (2020-11-07)
 
 
