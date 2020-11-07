@@ -89,7 +89,7 @@ function requestVPNInterface {
 			fi
 		done
 	else
-		read -r -p "What is the VPN interface in use?" vpnIface
+		read -r -p "VPN interface name: " vpnIface
 	fi
 
 	log "VPN interface set to $vpnIface"
