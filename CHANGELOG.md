@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/nologs-vpn/killswitch/compare/v1.1.8...v1.2.0) (2020-11-07)
+
+
+### Features
+
+* macos killswitch ([c5917b9](https://github.com/nologs-vpn/killswitch/commit/c5917b9d2bcce7ccb2d27aab77078778b79a354b))
+
 ### [1.1.8](https://github.com/nologs-vpn/killswitch/compare/v1.1.7...v1.1.8) (2020-11-07)
 
 
