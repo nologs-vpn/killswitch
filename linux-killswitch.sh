@@ -4,7 +4,11 @@
 # 	https://github.com/nologs-vpn/killswitch
 
 function log {
-	echo "[Killswitch][$(date)] - $1"
+	if [[ "$interractive" == "true" ]]; then
+		echo "[Killswitch][$(date)] - $1"
+	else
+		echo "[Killswitch][$(date)] - $1" >> "$ABSPATH/log.txt"
+	fi
 }
 
 type curl >/dev/null || die "Please install curl and then try again."
@@ -110,8 +114,6 @@ function lock {
 		rm "$iptablesBackup"
 	fi
 
-	[ -z "$vpnIface" ] && requestVPNInterface
-
 	storeIptables
 	iptables -P OUTPUT DROP
 	iptables -A INPUT -j ACCEPT -i lo
@@ -163,6 +165,23 @@ if [[ ! $(isConnected) =~ "yes" ]]
 then
 	log "You do not appear to be connected to a VPN. Connect to a VPN first, and then run Killswitch"
 	exit
+fi
+
+if [[ -z "$vpnIface" ]]; then
+	if [ -n "$dev" ]; then
+		# sent by openvpn via Environmental variables
+		# https://community.openvpn.net/openvpn/wiki/Openvpn23ManPage
+		log "openvpn interface received as: $dev"
+		vpnIface=$dev
+		interractive="false"
+	else
+		if [[ $interractive == "true" ]]; then
+			requestVPNInterface
+		else
+			die "unable to set VPN interface"
+			exit
+		fi
+	fi
 fi
 
 lock
