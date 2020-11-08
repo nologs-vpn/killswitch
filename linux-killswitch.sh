@@ -7,17 +7,23 @@ function log {
 	echo "[Killswitch][$(date)] - $1"
 }
 
+type curl >/dev/null || die "Please install curl and then try again."
+set -e
+
+interractive="true"
 defaultIface=$(ip addr | grep "state UP" | cut -d ":" -f 2 | head -n 1 | xargs)
 cmd="start"
 vpnIface=""
 remote=$(curl -s api.ipify.org)
 iptablesBackup="./iptables.backup"
-#######################################################
-#	c: command to run {start,restore}
+##########################################################
+#	c: command to run {unlock} - no command = activate ks
 #	i: vpn interface (ex: tun0, wg0)
 #	d: default interface (ex: eth0)
-#######################################################
-while getopts ":c:i:d:r:" opt; do
+#   b: true blocks and waits for CTRL+C
+#   b: true blocks and waits for CTRL+C
+##########################################################
+while getopts ":c:i:d:r:b:" opt; do
 	case $opt in
 		c) cmd="$OPTARG"
 		;;
@@ -26,6 +32,8 @@ while getopts ":c:i:d:r:" opt; do
 		r) remote="$OPTARG"
 		;;
 		d) defaultIface="$OPTARG"
+		;;
+		b) interractive="$OPTARG"
 		;;
 		\?) log "Invalid option -$OPTARG" >&2
 		;;
@@ -132,8 +140,7 @@ function storedIf {
 }
 
 function control_c {
-	echo ""
-	log "$(date) - Killswitch stopping"
+	log "stopping"
 	unlock
 	exit $?
 }
@@ -159,6 +166,8 @@ then
 fi
 
 lock
+
+[[ $interractive == "false" ]] && exit
 
 trap control_c SIGINT
 log "Killswitch started. Press ctrl+c to exit."
